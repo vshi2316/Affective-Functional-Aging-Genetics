@@ -1,0 +1,44 @@
+Package: AffectiveFunctionalAgingGenetics
+Type: Project
+Title: Affective-Functional Dynamics Across Ageing Cohorts and Genetic Architectures
+Version: 1.0.0
+Authors@R: person("Shi", "Lv", role = "aut")
+Description: Reproducible five-cohort longitudinal, history-anchored dynamic
+    mortality, multivariate genetic, molecular and external endpoint analyses
+    of affective burden and functional vulnerability in ageing.
+License: MIT
+Encoding: UTF-8
+Depends: R (>= 4.4.0)
+Imports:
+    data.table,
+    digest,
+    dplyr,
+    fixest,
+    GenomicSEM,
+    GenomicRanges,
+    ggplot2,
+    haven,
+    httr2,
+    IRanges,
+    jsonlite,
+    lavaan,
+    logistf,
+    metafor,
+    nlme,
+    patchwork,
+    purrr,
+    readr,
+    readxl,
+    Rsamtools,
+    scales,
+    stringr,
+    survival,
+    susieR,
+    tibble,
+    tidyr,
+    coloc,
+    bigsnpr
+Suggests:
+    cfdr.pleio,
+    LAVA,
+    ldscr

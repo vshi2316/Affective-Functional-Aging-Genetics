@@ -1,0 +1,6 @@
+trait_id,trait_name,lava_file,conjfdr_file,cases,controls
+mdd,MDD,mdd_lava.txt,mdd_conjfdr.txt,NA,NA
+loneliness,Loneliness,loneliness_lava.txt,loneliness_conjfdr.txt,NA,NA
+frailty,Frailty,frailty_lava.txt,frailty_conjfdr.txt,NA,NA
+self_rated_health,Self-rated health,self_rated_health_lava.txt,self_rated_health_conjfdr.txt,NA,NA
+walking_pace,Walking pace,walking_pace_lava.txt,walking_pace_conjfdr.txt,NA,NA

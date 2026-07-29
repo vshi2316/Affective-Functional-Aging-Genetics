@@ -1,0 +1,7 @@
+project_dir <- Sys.getenv("DCV_PROJECT_DIR", unset = getwd())
+Sys.setenv(TRACKC_STAGES = Sys.getenv("TRACKC_STAGES", unset = "freeze,spec,endpoints"))
+src <- function(number, name) source(file.path(project_dir, "scripts", "Track_D", sprintf("%02d_%s.R", number, name)), encoding = "UTF-8", chdir = FALSE)
+src(1, "endpoint_mapping")
+src(2, "endpoint_covariate_adjustment")
+src(3, "leave_one_chromosome_out")
+src(4, "leave_one_locus_out")

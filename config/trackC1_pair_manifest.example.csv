@@ -1,0 +1,7 @@
+trait_1,trait_2,overlap_rho
+mdd,frailty,0
+mdd,self_rated_health,0
+mdd,walking_pace,0
+loneliness,frailty,0
+loneliness,self_rated_health,0
+loneliness,walking_pace,0
