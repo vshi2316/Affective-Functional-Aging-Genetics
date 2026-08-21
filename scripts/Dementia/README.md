@@ -27,7 +27,7 @@ This directory contains the analysis of history-anchored affective and functiona
    - reads model outputs without refitting;
    - builds the four-panel dementia-related clinical-event figure;
    - exports SVG, PDF, 600-dpi TIFF and PNG preview files;
-   - writes aggregate source data and supplementary tables S50-S54.
+   - writes aggregate source data and submission tables with descriptive worksheet names for insertion at their final citation positions.
 
 ## Outcome definitions
 
