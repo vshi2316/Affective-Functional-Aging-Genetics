@@ -28,5 +28,19 @@ Sys.setenv(
   MORTALITY_ENDPOINT_SUPPORT_INPUT =
     file.path(data_root, "mortality_bridge", "mortality_endpoints_support.rds"),
   MORTALITY_OUTPUT_ROOT =
-    file.path(project_dir, "results", "mortality_bridge")
+    file.path(project_dir, "results", "mortality_bridge"),
+  DEMENTIA_DYNAMIC_CANDIDATE_INPUT =
+    file.path(project_dir, "results", "mortality_bridge", "candidate", "dynamic_candidate_exact.rds"),
+  DEMENTIA_ID_CROSSWALK_INPUT =
+    file.path(data_root, "dementia_bridge", "dementia_id_crosswalk.rds"),
+  DEMENTIA_ELSA_OUTCOME_INPUT =
+    file.path(data_root, "dementia_bridge", "elsa_harmonized_panel.dta"),
+  DEMENTIA_SHARE_OUTCOME_INPUT =
+    file.path(data_root, "dementia_bridge", "share_harmonized_panel.dta"),
+  DEMENTIA_ELSA_COGNITION_INPUT =
+    file.path(data_root, "dementia_bridge", "elsa_analysis_ready_long.rds"),
+  DEMENTIA_SHARE_COGNITION_INPUT =
+    file.path(data_root, "dementia_bridge", "share_analysis_ready_long.rds"),
+  DEMENTIA_OUTPUT_ROOT =
+    file.path(project_dir, "results", "dementia_bridge")
 )
