@@ -2,7 +2,7 @@ project_dir <- Sys.getenv("DCV_PROJECT_DIR", unset = getwd())
 pipeline <- unique(trimws(strsplit(Sys.getenv("DCV_RUN_PIPELINE", unset = ""), ",", fixed = TRUE)[[1]]))
 pipeline <- pipeline[nzchar(pipeline)]
 valid <- c(
-  "track_a", "longitudinal_robustness", "mortality_bridge",
+  "track_a", "longitudinal_robustness", "mortality_bridge", "dementia_bridge",
   "track_b_pre_fuma", "track_b_post_fuma", "track_d",
   "track_c_architecture", "track_c_gene_sets", "track_c_omics",
   "track_c_molecular", "track_b_audit"
@@ -18,6 +18,9 @@ for (stage in pipeline) {
   }
   if (stage == "mortality_bridge") {
     source(file.path(project_dir, "run_mortality_bridge.R"), encoding = "UTF-8")
+  }
+  if (stage == "dementia_bridge") {
+    source(file.path(project_dir, "run_dementia_bridge.R"), encoding = "UTF-8")
   }
   if (stage == "track_b_pre_fuma") {
     Sys.setenv(TRACKB_RUN_STAGES = "pre_fuma"); source(file.path(project_dir, "run_track_B.R"), encoding = "UTF-8")
