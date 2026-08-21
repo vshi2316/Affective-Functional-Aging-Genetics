@@ -82,7 +82,6 @@ labels_to_table <- function(x, cohort, wave, variable, role) {
 
 analysis_specification <- tibble::tribble(
   ~item, ~decision,
-  "analysis_role", "Secondary clinical-event extension; retain and report irrespective of direction or statistical significance",
   "cohorts", "ELSA and SHARE analysed separately",
   "outcome_ELSA", "First survey detection of reported dementia",
   "outcome_SHARE", "First survey detection of reported Alzheimer's disease or dementia",
@@ -102,8 +101,7 @@ analysis_specification <- tibble::tribble(
   "prodromal_sensitivity", "Exclude dementia-related outcomes first detected at the first post-anchor observed wave",
   "proxy_reporting", "Retain proxy-reported outcome in the main analysis; SHARE proxy codes 1 and 2 are both classified as proxy interviews; direct-interview-only endpoint is a sensitivity analysis",
   "outcome_stability_sensitivity", "Exclude first-positive events followed by a later explicit negative dementia-related assessment",
-  "model_comparison", "M1 current scores versus M2 history-deviation components; test beta_HA=beta_DA and beta_HF=beta_DF",
-  "reporting_rule", "All prespecified estimates retained regardless of direction, heterogeneity or P value"
+  "model_comparison", "M1 current scores versus M2 history-deviation components; test beta_HA=beta_DA and beta_HF=beta_DF"
 )
 readr::write_csv(analysis_specification, file.path(out_dir, "analysis_specification.csv"), na = "")
 
@@ -602,14 +600,6 @@ model_support <- dplyr::bind_rows(
     people_with_cognition = dplyr::n_distinct(.data$candidate_id[is.finite(.data$cognition_z)]),
     events_with_cognition = sum(.data$dementia_event == 1L & is.finite(.data$cognition_z)),
     .groups = "drop"
-  ) |>
-  dplyr::mutate(
-    freeze_status = dplyr::case_when(
-      .data$people >= 1000 & .data$dementia_related_events >= 100 &
-        .data$competing_deaths >= 100 & .data$events_with_cognition >= 100 ~
-        "eligible",
-      TRUE ~ "insufficient_support"
-    )
   )
 readr::write_csv(model_support, file.path(out_dir, "model_support.csv"), na = "")
 saveRDS(candidate_model, file.path(out_dir, "dementia_event_main.rds"))
