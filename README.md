@@ -1,46 +1,56 @@
+[Uploading README.md…]()
 # Affective-functional dynamics across ageing cohorts and genetic architectures
 
-Analysis code for a five-cohort longitudinal study of affective burden and functional vulnerability, a history-anchored mortality analysis, and parallel multivariate genomic analyses.
+This repository contains the analysis code for a five-cohort study of affective burden and functional vulnerability. The workflow separates population-average, between-person and within-person associations; relates history-anchored burden and current deviation to mortality and dementia-related clinical events; and evaluates parallel affective and functional genetic architectures.
 
-The repository contains the custom code used for the reported analyses. Participant-level cohort data, mortality records, licensed genome-wide association study summary statistics, molecular resources and reference panels are governed by their original providers and are not redistributed.
+Participant-level cohort data, mortality and dementia records, licensed genome-wide association study summary statistics, molecular resources and reference panels are controlled by their original providers and are not redistributed.
+
+## Analyses
+
+The repository implements five linked components:
+
+1. harmonisation and longitudinal modelling in CHARLS, ELSA, HRS, MHAS and SHARE;
+2. timing, fixed-effect and within-between sensitivity analyses;
+3. attained-age history-deviation models for all-cause mortality;
+4. cohort-specific cause-specific models for subsequent dementia-related outcomes in ELSA and SHARE, with death handled as a competing event;
+5. linkage disequilibrium score regression, genomic structural equation modelling, factor genome-wide association analyses, local architecture, molecular follow-up and external endpoint mapping.
 
 ## Repository structure
 
 ```text
-config/                            local path template and Track C input schemas
-data/README.md                     governed-input contract
+config/                            local path template and input schemas
+data/README.md                     governed input-data contract
 scripts/Track_A/                   cohort harmonisation and longitudinal models
 scripts/Longitudinal_robustness/   estimand and timing sensitivity analyses
 scripts/Mortality/                 dynamic mortality analysis
+scripts/Dementia/                  dementia-related clinical-event analysis
 scripts/Track_B/                   LDSC, GenomicSEM and factor GWAS
 scripts/Track_C/                   local architecture and molecular analyses
 scripts/Track_D/                   external endpoint mapping
-software/                          session information from the analyses
+software/                          recorded analysis environments
 run_*.R                            stage-level entry points
 ```
 
-The 35 analysis scripts are listed in `scripts/SCRIPT_MANIFEST.csv` in execution order and mapped to their reporting role.
+The 38 analysis scripts are listed in `scripts/SCRIPT_MANIFEST.csv` in execution order and mapped to their reporting role.
 
 ## Requirements
 
-Use R 4.4 or later. Required R packages are listed in `DESCRIPTION`. Recorded package versions are provided in:
+Use R 4.4 or later. Required R packages are listed in `DESCRIPTION`. Recorded environments for the longitudinal, mortality and figure workflows are provided in `software/`.
 
-- `software/longitudinal_sessionInfo.txt`
-- `software/mortality_sessionInfo.txt`
-- `software/figure_sessionInfo.txt`
-
-The genomic workflow also uses GenomicSEM, LDSC, LAVA, FUMA, MAGMA, PLINK, SMR, coloc and susieR. Install third-party tools from their official distributions and comply with their licences. Paths to local executables and reference resources are set in the configuration file.
+The genomic workflow also requires GenomicSEM, LDSC, LAVA, FUMA, MAGMA, PLINK and SMR. Install external software from its official distribution and comply with its licence. Local executables and reference resources are declared in the configuration file.
 
 ## Configuration
 
-Copy the configuration template, edit local paths, and load it before an analysis stage:
+Copy the configuration template and replace the example paths with approved local resources:
 
 ```r
 file.copy("config/config.example.R", "config/config.R")
 source("config/config.R", encoding = "UTF-8")
 ```
 
-`config/config.R` is excluded from Git. Track C local architecture additionally requires copies of the two manifest templates:
+`config/config.R` is excluded from Git.
+
+The local architecture analysis also requires copies of the two manifest templates:
 
 ```r
 file.copy(
@@ -53,24 +63,42 @@ file.copy(
 )
 ```
 
-Replace the example paths with the approved local inputs. The required mortality input columns and interview-date rules are documented in `data/README.md`. Data providers, catalogue identifiers and access routes are listed in `DATA_ACCESS.md`.
+The mortality and dementia-related outcome input schemas are documented in `data/README.md`. Provider access routes are listed in `DATA_ACCESS.md`.
 
-## Execution order
+## Cohort and clinical-event workflow
 
-### Cohort and mortality analyses
+Run R from the repository root:
 
 ```r
 source("config/config.R", encoding = "UTF-8")
 source("run_track_A.R", encoding = "UTF-8")
 source("run_longitudinal_robustness.R", encoding = "UTF-8")
 source("run_mortality_bridge.R", encoding = "UTF-8")
+source("run_dementia_bridge.R", encoding = "UTF-8")
 ```
 
-Track A harmonises CHARLS, ELSA, HRS, MHAS and SHARE before cohort-specific models. The robustness stage performs the within-between decomposition and timing analyses. The mortality stage constructs attained-age start-stop data from quality-controlled visit and endpoint files, fits the prespecified models, and generates aggregate figure data.
+Track A prepares the cohort-specific domains and longitudinal models. The robustness workflow performs the fixed-effect, timing and within-between analyses. The mortality workflow constructs exact-date attained-age intervals and estimates age-varying history and deviation associations. The dementia workflow reuses those dynamic intervals, links governed ELSA and SHARE outcome records, fits cohort-specific cause-specific models and creates aggregate source data.
 
-### Genomic analyses
+The two dementia-related endpoints retain their cohort wording. ELSA contributes first survey-reported dementia; SHARE contributes first survey-reported Alzheimer disease or dementia. The recorded date represents first survey detection rather than exact clinical onset.
 
-Track B contains a FUMA checkpoint. Run the pre-FUMA stage, submit the generated files with the settings recorded by the scripts, download the required FUMA outputs, and then continue with the remaining stages.
+Individual stages can also be selected with `run_all.R`:
+
+```r
+Sys.setenv(
+  DCV_RUN_PIPELINE = paste(
+    "track_a",
+    "longitudinal_robustness",
+    "mortality_bridge",
+    "dementia_bridge",
+    sep = ","
+  )
+)
+source("run_all.R", encoding = "UTF-8")
+```
+
+## Genomic workflow
+
+Track B contains a FUMA checkpoint. Run the pre-FUMA stage, submit the generated files using the recorded settings, place the downloaded outputs at the configured path and continue with the remaining stages.
 
 ```r
 source("config/config.R", encoding = "UTF-8")
@@ -78,7 +106,7 @@ source("config/config.R", encoding = "UTF-8")
 Sys.setenv(DCV_RUN_PIPELINE = "track_b_pre_fuma")
 source("run_all.R", encoding = "UTF-8")
 
-# Pause here for the FUMA submission and download.
+# Complete the documented FUMA submission before continuing.
 
 Sys.setenv(
   DCV_RUN_PIPELINE = paste(
@@ -95,13 +123,17 @@ Sys.setenv(
 source("run_all.R", encoding = "UTF-8")
 ```
 
-Individual stage entry points are retained for users who have access to only part of the governed input set.
-
 ## Outputs
 
-Generated files are written under `results/`, which is excluded from Git. Only aggregate tables and figure source data permitted by the original data-use agreements may be shared. Do not upload participant identifiers, dates, row-level records, genotype files, controlled summary statistics, credentials or licensed reference resources.
+Generated files are written under `results/`, which is excluded from Git. The clinical workflows create model summaries, vector and raster figures, aggregate source data and software-session records. Only aggregate outputs permitted by the applicable data-use agreements may be shared.
 
-Because the primary inputs are access controlled, the public workflow cannot execute without separately approved data access. The repository provides the complete custom analysis logic, required input schemas, execution order, software environments and public data-access routes.
+Do not upload participant identifiers, dates, row-level observations, genotype files, controlled summary statistics, credentials or licensed reference resources.
+
+Because the principal inputs are access controlled, the complete workflow requires separate approval from the relevant providers. The repository supplies the custom analysis logic, input schemas, execution order and public access routes needed to reproduce the analyses in an authorised environment.
+
+## Data and code availability
+
+Data access conditions and provider links are given in `DATA_ACCESS.md`. The repository does not grant access to third-party data or alter their terms of use.
 
 ## Citation and licence
 
