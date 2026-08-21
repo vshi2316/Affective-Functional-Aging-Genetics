@@ -1,3 +1,4 @@
+[README.md](https://github.com/user-attachments/files/31285564/README.md)
 # Governed input-data contract
 
 No participant-level data or licensed summary statistics are distributed with this repository. All controlled files must remain in an access-controlled local environment.
@@ -59,6 +60,54 @@ Required columns:
 Format: RDS data frame containing CHARLS with the same columns as the main endpoint input.
 
 Mortality and censoring dates must reflect the adjudicated endpoint hierarchy documented for each cohort. A current visit must precede the endpoint date. Exposure information from proxy or end-of-life interviews is not used.
+
+## Dementia-related outcome inputs
+
+The dementia-related outcome workflow reuses `dynamic_candidate_exact.rds` from the mortality workflow and requires five controlled inputs.
+
+### Identifier crosswalk
+
+Format: RDS data frame.
+
+Required columns:
+
+- `cohort`: ELSA or SHARE;
+- `candidate_id`: analysis identifier in `dynamic_candidate_exact.rds`;
+- `provider_id`: identifier in the corresponding harmonized provider file.
+
+The pair `cohort`, `candidate_id` and the pair `cohort`, `provider_id` must each be unique. The crosswalk is governed participant-level information and must not be committed.
+
+### ELSA harmonized outcome panel
+
+Format: Stata file.
+
+Required identifier: `idauniqc`.
+
+For waves 1-10, the workflow reads the harmonized variables `r[wave]demene`, `r[wave]iwstat`, `r[wave]iwy`, `r[wave]iwm` and `r[wave]proxy`. Dementia-related status must use 0 for no and 1 for yes. Proxy status uses 1 for a proxy interview.
+
+### SHARE harmonized outcome panel
+
+Format: Stata file.
+
+Required identifier and country variables: `mergeid`, `country`.
+
+For waves 2 and 4-9, the workflow reads `r[wave]alzdeme`, `r[wave]iwstat`, `r[wave]iwy`, `r[wave]iwm` and `r[wave]proxy`. Alzheimer disease or dementia status must use 0 for no and 1 for yes. Proxy values 1 and 2 are both classified as proxy interviews.
+
+### Cohort cognition files
+
+Format: one RDS long-format data frame per cohort.
+
+Required columns:
+
+- `id`: provider identifier corresponding to `provider_id` in the crosswalk;
+- `wave`: cohort wave;
+- `cognition_score`: cohort-native observed cognition score.
+
+The cognition sensitivity uses the dynamic-entry wave or immediately preceding cohort wave and standardizes observed scores within the eligible cohort sample.
+
+### Event-time rules
+
+The primary analysis requires an explicit negative dementia-related status at dynamic entry. First subsequent positive status defines the survey-detected event date. ELSA and SHARE endpoints are analysed separately. Known death is retained as a competing event when supported by a dynamic risk interval. A sensitivity analysis censors follow-up at the last observed dementia-related assessment.
 
 ## Other governed resources
 
