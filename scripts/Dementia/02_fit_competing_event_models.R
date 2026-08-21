@@ -477,7 +477,6 @@ readr::write_csv(manifest, file.path(out_dir, "13_input_manifest.csv"), na = "")
 writeLines(c(
   "Dynamic dementia-related outcome model family completed.",
   "ELSA and SHARE were analysed and reported separately because outcome wording differs.",
-  "All prespecified results are retained irrespective of direction or statistical significance.",
   paste0("Completed at: ", format(Sys.time(), tz = "Asia/Shanghai"))
 ), lock_path)
 message("Dementia-related outcome models completed: ", out_dir)
