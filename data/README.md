@@ -1,4 +1,4 @@
-[README.md](https://github.com/user-attachments/files/31285564/README.md)
+[README.md](https://github.com/user-attachments/files/31404645/README.md)
 # Governed input-data contract
 
 No participant-level data or licensed summary statistics are distributed with this repository. All controlled files must remain in an access-controlled local environment.
@@ -110,6 +110,34 @@ The cognition sensitivity uses the dynamic-entry wave or immediately preceding c
 The primary analysis requires an explicit negative dementia-related status at dynamic entry. First subsequent positive status defines the survey-detected event date. ELSA and SHARE endpoints are analysed separately. Known death is retained as a competing event when supported by a dynamic risk interval. A sensitivity analysis censors follow-up at the last observed dementia-related assessment.
 
 ## Other governed resources
+
+## ADNI factor-PGS clinical-validation inputs
+
+The ADNI module requires two governed files. Their local paths are set by `ADNI_CLINICAL_FILE` and `ADNI_FACTOR_PGS_FILE` in `config/config.R`.
+
+### ADNI clinical longitudinal file
+
+Format: CSV exported from ADNIMERGE.
+
+Required columns:
+
+- `PTID`: participant identifier;
+- `EXAMDATE`: clinical assessment date in a format accepted by `as.Date()`;
+- `CDRSB`: Clinical Dementia Rating-Sum of Boxes;
+- `AGE`, `PTGENDER`, `PTEDUCAT`, `DX_bl`, `APOE4`.
+
+### Frozen factor-PGS file
+
+Format: tab-separated text file.
+
+Required columns:
+
+- `IID` or `PTID`: participant identifier;
+- `PGS_affective_z`, `PGS_functional_z`;
+- `primary_ancestry_proxy`;
+- `PC1` to `PC10`.
+
+The PGS file must be generated from weights fixed before examination of ADNI CDR-SB outcomes. Do not commit this file, the underlying genotypes, weights, identifiers, dates or row-level outputs.
 
 The full repository additionally requires:
 
