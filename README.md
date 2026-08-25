@@ -1,4 +1,4 @@
-[Uploading README.md…]()
+[README.md](https://github.com/user-attachments/files/31404634/README.md)
 # Affective-functional dynamics across ageing cohorts and genetic architectures
 
 This repository contains the analysis code for a five-cohort study of affective burden and functional vulnerability. The workflow separates population-average, between-person and within-person associations; relates history-anchored burden and current deviation to mortality and dementia-related clinical events; and evaluates parallel affective and functional genetic architectures.
@@ -27,11 +27,12 @@ scripts/Dementia/                  dementia-related clinical-event analysis
 scripts/Track_B/                   LDSC, GenomicSEM and factor GWAS
 scripts/Track_C/                   local architecture and molecular analyses
 scripts/Track_D/                   external endpoint mapping
+scripts/ADNI/                      individual-level ADNI factor-PGS clinical validation
 software/                          recorded analysis environments
 run_*.R                            stage-level entry points
 ```
 
-The 38 analysis scripts are listed in `scripts/SCRIPT_MANIFEST.csv` in execution order and mapped to their reporting role.
+The analysis scripts are listed in `scripts/SCRIPT_MANIFEST.csv` in execution order and mapped to their reporting role.
 
 ## Requirements
 
@@ -122,6 +123,26 @@ Sys.setenv(
 )
 source("run_all.R", encoding = "UTF-8")
 ```
+
+## ADNI factor-PGS clinical validation
+
+The ADNI module is an independent individual-level validation of the genetic domains. It uses frozen affective-factor and functional-factor polygenic scores with longitudinal Clinical Dementia Rating-Sum of Boxes (CDR-SB) measurements. It is distinct from the TPMI and FinnGen gene-set endpoint-mapping workflow.
+
+After setting the three `ADNI_*` paths in `config/config.R`, run:
+
+```r
+source("config/config.R", encoding = "UTF-8")
+source("run_adni_validation.R", encoding = "UTF-8")
+```
+
+Alternatively, select the module through the global dispatcher:
+
+```r
+Sys.setenv(DCV_RUN_PIPELINE = "adni_validation")
+source("run_all.R", encoding = "UTF-8")
+```
+
+The module writes a locked analysis dataset, model summaries, Figure 6 assets, aggregate source data, residual diagnostics and supplementary tables under `results/adni_validation/`. The estimates are longitudinal associations; they do not establish causality, clinical utility or a prediction tool. Full input, execution and interpretation details are in `scripts/ADNI/README.md`.
 
 ## Outputs
 
