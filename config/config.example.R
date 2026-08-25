@@ -42,5 +42,11 @@ Sys.setenv(
   DEMENTIA_SHARE_COGNITION_INPUT =
     file.path(data_root, "dementia_bridge", "share_analysis_ready_long.rds"),
   DEMENTIA_OUTPUT_ROOT =
-    file.path(project_dir, "results", "dementia_bridge")
+    file.path(project_dir, "results", "dementia_bridge"),
+  ADNI_CLINICAL_FILE =
+    file.path(data_root, "adni_validation", "ADNIMERGE.csv"),
+  ADNI_FACTOR_PGS_FILE =
+    file.path(data_root, "adni_validation", "ADNI_factor_PGS_scores.tsv"),
+  ADNI_OUTPUT_ROOT =
+    file.path(project_dir, "results", "adni_validation")
 )
