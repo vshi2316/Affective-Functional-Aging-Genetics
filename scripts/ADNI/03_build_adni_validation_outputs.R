@@ -112,10 +112,10 @@ readr::write_csv(forest_data, file.path(source_dir, "Figure6_factor_PGS_time_eff
 readr::write_csv(diagnostic_data, file.path(source_dir, "Supplementary_Figure_residual_diagnostics.csv"), na = "")
 
 wb <- openxlsx::createWorkbook()
-for (sheet in c("Table_S54_sample", "Table_S55_model", "Table_S55_diagnosis_slopes")) openxlsx::addWorksheet(wb, sheet)
-openxlsx::writeData(wb, "Table_S54_sample", sample_summary)
-openxlsx::writeData(wb, "Table_S55_model", fixed)
-openxlsx::writeData(wb, "Table_S55_diagnosis_slopes", diagnosis_slopes)
+for (sheet in c("Table_S58_sample", "Table_S59_model", "Table_S59_diagnosis_slopes")) openxlsx::addWorksheet(wb, sheet)
+openxlsx::writeData(wb, "Table_S58_sample", sample_summary)
+openxlsx::writeData(wb, "Table_S59_model", fixed)
+openxlsx::writeData(wb, "Table_S59_diagnosis_slopes", diagnosis_slopes)
 header_style <- openxlsx::createStyle(textDecoration = "bold", fgFill = "#DCE6F1")
 for (sheet in names(wb)) {
   openxlsx::addStyle(wb, sheet, header_style, rows = 1, cols = 1:40, gridExpand = TRUE)

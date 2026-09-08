@@ -1,0 +1,45 @@
+order,module,script,role,runner
+1,Track A,scripts/Track_A/01_prepare_cohort_inputs.R,Prepare harmonised cohort inputs,run_track_A.R
+2,Track A,scripts/Track_A/02_derive_and_harmonize_domains.R,Derive affective functional and cognition domains,run_track_A.R
+3,Track A,scripts/Track_A/03_measurement_invariance.R,Evaluate measurement structure,run_track_A.R
+4,Track A,scripts/Track_A/04_longitudinal_models.R,Fit cohort longitudinal models,run_track_A.R
+5,Track A,scripts/Track_A/05_meta_analysis_and_robustness.R,Meta-analysis and longitudinal robustness,run_track_A.R
+6,Track A,scripts/Track_A/06_build_trackA_evidence_package.R,Build longitudinal evidence package,run_track_A.R
+7,Longitudinal robustness,scripts/Longitudinal_robustness/01_freeze_and_audit.R,Freeze inputs and audit lineage,run_longitudinal_robustness.R
+8,Longitudinal robustness,scripts/Longitudinal_robustness/02_longitudinal_robustness.R,Fit timing and random-effect sensitivities,run_longitudinal_robustness.R
+9,Longitudinal robustness,scripts/Longitudinal_robustness/03_genomic_boundary_audit.R,Audit genomic model boundary,run_longitudinal_robustness.R
+10,Longitudinal robustness,scripts/Longitudinal_robustness/04_lagged_and_sample_reconciliation.R,Fit lagged and participant-plus-wave models,run_longitudinal_robustness.R
+11,Longitudinal robustness,scripts/Longitudinal_robustness/05_within_between_synthesis.R,Synthesise within-between estimands,run_longitudinal_robustness.R
+12,Longitudinal robustness,scripts/Longitudinal_robustness/06_build_submission_figures.R,Build longitudinal submission figures,run_longitudinal_robustness.R
+13,Mortality,scripts/Mortality/01_build_dynamic_candidate.R,Build exact-date dynamic mortality candidate,run_mortality_bridge.R
+14,Mortality,scripts/Mortality/02_fit_dynamic_models.R,Fit age-varying history-deviation mortality models,run_mortality_bridge.R
+15,Mortality,scripts/Mortality/03_build_figure_and_source_data.R,Build mortality figure and source data,run_mortality_bridge.R
+16,Mortality prediction,scripts/Mortality_prediction/01_build_age50_landmark_dataset.R,Build age-50 fixed-horizon landmark dataset,run_mortality_prediction.R
+17,Mortality prediction,scripts/Mortality_prediction/02_fit_and_validate_five_year_models.R,Fit and validate three five-year mortality models,run_mortality_prediction.R
+18,Mortality prediction,scripts/Mortality_prediction/03_build_submission_outputs.R,Build Table 2 Supplementary Figure 34 and S54-S57,run_mortality_prediction.R
+19,Dementia,scripts/Dementia/01_build_event_dataset.R,Build ELSA and SHARE dementia-related event datasets,run_dementia_bridge.R
+20,Dementia,scripts/Dementia/02_fit_competing_event_models.R,Fit cause-specific competing-event models,run_dementia_bridge.R
+21,Dementia,scripts/Dementia/03_build_figure_and_source_data.R,Build dementia figure and source data,run_dementia_bridge.R
+22,ADNI,scripts/ADNI/01_build_locked_cdrsb_dataset.R,Build locked ADNI CDR-SB validation data,run_adni_validation.R
+23,ADNI,scripts/ADNI/02_fit_factor_pgs_cdrsb_models.R,Fit factor-PGS longitudinal models,run_adni_validation.R
+24,ADNI,scripts/ADNI/03_build_adni_validation_outputs.R,Build ADNI aggregate outputs and S58-S59,run_adni_validation.R
+25,Track B,scripts/Track_B/01_prepare_genetic_covariance.R,Prepare genetic covariance inputs,run_track_B.R
+26,Track B,scripts/Track_B/02_compare_genomicsem_models.R,Compare genomic structural equation models,run_track_B.R
+27,Track B,scripts/Track_B/03_factor_gwas_and_qsnp.R,Run factor GWAS and QSNP analysis,run_track_B.R
+28,Track B,scripts/Track_B/04_prepare_fuma_uploads.R,Prepare FUMA checkpoint files,run_track_B.R
+29,Track B,scripts/Track_B/05_local_magma_analysis.R,Run local MAGMA analysis,run_track_B.R
+30,Track B,scripts/Track_B/06_import_fuma_results.R,Import and harmonise FUMA results,run_track_B.R
+31,Track B,scripts/Track_B/07_factor_gwas_quality_and_increment.R,Audit factor-GWAS quality and increment,run_track_B.R
+32,Track C,scripts/Track_C/01_local_shared_architecture.R,Estimate local shared architecture,run_track_C.R
+33,Track C,scripts/Track_C/02_freeze_gene_sets.R,Freeze cross-model gene sets,run_track_C.R
+34,Track C,scripts/Track_C/03_external_omics.R,Run external omics enrichment,run_track_C.R
+35,Track C,scripts/Track_C/04_external_omics_adjustment.R,Fit adjusted external omics models,run_track_C.R
+36,Track C,scripts/Track_C/05_external_omics_evidence.R,Integrate external omics evidence,run_track_C.R
+37,Track C,scripts/Track_C/06_candidate_molecular_followup.R,Run candidate molecular follow-up,run_track_C.R
+38,Track C,scripts/Track_C/07_brain_eqtl_locus_colocalisation.R,Run brain eQTL locus colocalisation,run_track_C.R
+39,Track C,scripts/Track_C/08_multisignal_colocalisation.R,Run multi-signal colocalisation,run_track_C.R
+40,Track C,scripts/Track_C/09_molecular_evidence_classification.R,Classify integrated molecular evidence,run_track_C.R
+41,Track D,scripts/Track_D/01_endpoint_mapping.R,Map gene sets to external endpoints,run_track_D.R
+42,Track D,scripts/Track_D/02_endpoint_covariate_adjustment.R,Fit covariate-adjusted endpoint models,run_track_D.R
+43,Track D,scripts/Track_D/03_leave_one_chromosome_out.R,Run leave-one-chromosome-out analysis,run_track_D.R
+44,Track D,scripts/Track_D/04_leave_one_locus_out.R,Run leave-one-locus-out analysis,run_track_D.R
