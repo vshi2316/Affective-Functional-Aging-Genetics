@@ -29,6 +29,12 @@ Sys.setenv(
     file.path(data_root, "mortality_bridge", "mortality_endpoints_support.rds"),
   MORTALITY_OUTPUT_ROOT =
     file.path(project_dir, "results", "mortality_bridge"),
+  MORTALITY_PREDICTION_CANDIDATE_INPUT =
+    file.path(project_dir, "results", "mortality_bridge", "candidate", "dynamic_candidate_exact.rds"),
+  MORTALITY_PREDICTION_OUTPUT_ROOT =
+    file.path(project_dir, "results", "mortality_prediction"),
+  MORTALITY_PREDICTION_SUPPLEMENTARY_TABLES_INPUT =
+    file.path(project_dir, "manuscript", "Supplementary_Tables.xlsx"),
   DEMENTIA_DYNAMIC_CANDIDATE_INPUT =
     file.path(project_dir, "results", "mortality_bridge", "candidate", "dynamic_candidate_exact.rds"),
   DEMENTIA_ID_CROSSWALK_INPUT =
