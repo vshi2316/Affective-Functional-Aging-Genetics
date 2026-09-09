@@ -33,6 +33,12 @@ Sys.setenv(
     file.path(project_dir, "results", "mortality_bridge", "candidate", "dynamic_candidate_exact.rds"),
   MORTALITY_PREDICTION_OUTPUT_ROOT =
     file.path(project_dir, "results", "mortality_prediction"),
+  CLINICAL_LANDMARK_INPUT =
+    file.path(project_dir, "results", "mortality_prediction", "landmark", "age50_landmark_dataset.rds"),
+  CLINICAL_PRIOR1_OUTPUT_ROOT =
+    file.path(project_dir, "results", "clinical_risk_prior1_continuous"),
+  CLINICAL_RECALIBRATION_OUTPUT_ROOT =
+    file.path(project_dir, "results", "clinical_risk_recalibration"),
   MORTALITY_PREDICTION_SUPPLEMENTARY_TABLES_INPUT =
     file.path(project_dir, "manuscript", "Supplementary_Tables.xlsx"),
   DEMENTIA_DYNAMIC_CANDIDATE_INPUT =
