@@ -1,3 +1,4 @@
+[DATA_ACCESS.md](https://github.com/user-attachments/files/31987535/DATA_ACCESS.md)
 # Data access
 
 This repository distributes analysis code and aggregate reporting templates. Participant-level cohort data, genotypes, controlled summary statistics, licensed molecular resources and reference panels remain with their original providers.
@@ -24,7 +25,6 @@ This repository distributes analysis code and aggregate reporting templates. Par
 | eQTL Catalogue | https://www.ebi.ac.uk/eqtl/Data_access/ | Regional eQTL follow-up |
 | MetaBrain | https://www.metabrain.nl/ | Brain eQTL colocalisation |
 | 1000 Genomes | https://www.internationalgenome.org/data | Linkage-disequilibrium reference |
-| ADNI | https://adni.loni.usc.edu/data-samples/access-data/ | Individual-level factor-PGS validation under ADNI terms |
 
 ## Local data contract
 
