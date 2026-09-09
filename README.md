@@ -1,4 +1,4 @@
-[Uploading README.md…]()
+[README.md](https://github.com/user-attachments/files/31987526/README.md)
 # Affective-functional dynamics across ageing cohorts and genetic architectures
 
 This repository contains the reproducible analysis workflow for a five-cohort study of affective burden, functional vulnerability, mortality, dementia-related outcomes and genetic architecture. The workflow separates population-average, between-person and within-person information, distinguishes historical burden from current deviation, evaluates five-year mortality risk stratification and performs complementary genomic and molecular analyses.
@@ -19,7 +19,6 @@ The repository contains the following analysis modules:
 8. LDSC, GenomicSEM, factor GWAS, QSNP, FUMA and MAGMA analyses;
 9. local shared architecture, gene-set, external omics and molecular follow-up analyses;
 10. external endpoint mapping and leave-one-chromosome or leave-one-locus analyses;
-11. optional individual-level ADNI factor-PGS validation.
 
 ## Repository structure
 
@@ -34,7 +33,6 @@ scripts/Dementia/                  dementia-related clinical-event analysis
 scripts/Track_B/                   LDSC, GenomicSEM, factor GWAS and FUMA/MAGMA
 scripts/Track_C/                   local architecture, omics and molecular analyses
 scripts/Track_D/                   external endpoint mapping and influence analyses
-scripts/ADNI/                      optional factor-PGS validation
 scripts/SCRIPT_MANIFEST.csv        ordered script inventory
 software/README.md                 software-environment recording contract
 run_*.R                            stage-level entry points
@@ -213,15 +211,6 @@ Sys.setenv(
 source("run_all.R", encoding = "UTF-8")
 ```
 
-## ADNI factor-PGS validation
-
-After configuring `ADNI_CLINICAL_FILE`, `ADNI_FACTOR_PGS_FILE` and `ADNI_OUTPUT_ROOT`:
-
-```r
-source("config/config.R", encoding = "UTF-8")
-source("run_adni_validation.R", encoding = "UTF-8")
-```
-
 ## Output and data policy
 
 ```text
@@ -231,7 +220,6 @@ results/
 ├── clinical_risk_prior1_continuous/
 ├── clinical_risk_recalibration/
 ├── dementia_bridge/
-├── adni_validation/
 └── ...
 ```
 
