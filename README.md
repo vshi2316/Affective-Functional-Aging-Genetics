@@ -1,3 +1,4 @@
+[Uploading README.md…]()
 [README.md](https://github.com/user-attachments/files/31987526/README.md)
 # Affective-functional dynamics across ageing cohorts and genetic architectures
 
@@ -16,9 +17,10 @@ The repository contains the following analysis modules:
 5. clinical translation using continuous history-deviation models in adults aged 50–64 years with at least one prior functional measurement;
 6. external calibration and cohort-specific intercept recalibration for transportability assessment;
 7. dementia-related cause-specific analyses with death retained as a competing event;
-8. LDSC, GenomicSEM, factor GWAS, QSNP, FUMA and MAGMA analyses;
-9. local shared architecture, gene-set, external omics and molecular follow-up analyses;
-10. external endpoint mapping and leave-one-chromosome or leave-one-locus analyses;
+8. first-recorded difficulty in basic activities of daily living (ADL) at the next scheduled assessment;
+9. LDSC, GenomicSEM, factor GWAS, QSNP, FUMA and MAGMA analyses;
+10. local shared architecture, gene-set, external omics and molecular follow-up analyses;
+11. external endpoint mapping and leave-one-chromosome or leave-one-locus analyses;
 
 ## Repository structure
 
@@ -30,6 +32,7 @@ scripts/Longitudinal_robustness/   timing, lagged and within-between analyses
 scripts/Mortality/                 dynamic mortality analysis
 scripts/Mortality_prediction/      five-year prediction and clinical translation
 scripts/Dementia/                  dementia-related clinical-event analysis
+scripts/ADL/                       first-recorded self-care difficulty analysis
 scripts/Track_B/                   LDSC, GenomicSEM, factor GWAS and FUMA/MAGMA
 scripts/Track_C/                   local architecture, omics and molecular analyses
 scripts/Track_D/                   external endpoint mapping and influence analyses
@@ -71,6 +74,8 @@ CLINICAL_PRIOR1_OUTPUT_ROOT
 CLINICAL_RECALIBRATION_OUTPUT_ROOT
 ```
 
+The ADL paths use the `ADL_*_INPUT` variables and `ADL_OUTPUT_ROOT`. The six private inputs and their required fields are listed in [data/README.md](data/README.md). Set `ADL_CUTPOINTS_INPUT` to the frozen clinical-history cutpoint file used for this analysis.
+
 The default example uses:
 
 ```text
@@ -98,6 +103,7 @@ source("run_mortality_bridge.R", encoding = "UTF-8")
 source("run_mortality_prediction.R", encoding = "UTF-8")
 source("run_clinical_translation.R", encoding = "UTF-8")
 source("run_dementia_bridge.R", encoding = "UTF-8")
+source("run_adl.R", encoding = "UTF-8")
 ```
 
 The global dispatcher accepts the same modules:
@@ -111,6 +117,7 @@ Sys.setenv(
     "mortality_prediction",
     "clinical_translation",
     "dementia_bridge",
+    "adl",
     sep = ","
   )
 )
@@ -186,6 +193,20 @@ External_Recalibration_Calibration.tiff
 
 The dementia workflow reuses governed dynamic intervals and links ELSA and SHARE outcome records. First survey-reported dementia or Alzheimer disease events are analysed with cause-specific models that retain death as a competing event when it occurs within a valid risk interval.
 
+## First-recorded basic ADL difficulty
+
+The ADL module examines whether previous functional level distinguishes difficulty at the next scheduled assessment among adults whose current function lies within the cohort-specific central range. It uses one eligible index visit per person at age 50–64. All five basic self-care items must show no difficulty at that visit and at every earlier dated assessment with complete items.
+
+The cohort-specific analysis compares the 75th and 25th percentiles of prior functional level at fixed current function. It reports adjusted absolute risk differences per 1000 participants who completed the next direct assessment. HRS supplies a fixed 70% development split. Its model coefficients are applied to the HRS holdout and the other four cohorts for AUC and Brier comparisons. An observation audit covers the full eligible group and counts deaths before reassessment separately from unresolved outcomes.
+
+Run the module after setting the private paths in `config/config.R`:
+
+```r
+source("run_adl.R", encoding = "UTF-8")
+```
+
+The same stage is available through `DCV_RUN_PIPELINE = "adl"`. The script and complete output inventory are described in [scripts/ADL/README.md](scripts/ADL/README.md). With the frozen manuscript inputs, 41,669 participants are eligible, 38,254 have an observed next-wave self-care assessment and 1,694 have first-recorded difficulty. The full eligibility audit identifies 348 deaths before reassessment and 3,067 unresolved outcomes.
+
 ## Genomic and molecular workflow
 
 Track B contains a FUMA checkpoint. Run the pre-FUMA stage, complete the documented FUMA submission, place downloaded outputs at the configured location and continue with the post-FUMA stages.
@@ -220,6 +241,7 @@ results/
 ├── clinical_risk_prior1_continuous/
 ├── clinical_risk_recalibration/
 ├── dementia_bridge/
+├── ADL_first_recorded/
 └── ...
 ```
 
