@@ -12,7 +12,7 @@ Sys.setenv(DCV_PROJECT_DIR = project_dir)
 config_file <- file.path(project_dir, "config", "config.R")
 if (file.exists(config_file)) source(config_file, encoding = "UTF-8")
 
-script <- file.path(project_dir, "scripts", "ADL", "01_first_recorded_adl.R")
+script <- file.path(project_dir, "scripts", "ADL", "01_build_first_recorded_adl_evidence.R")
 if (!file.exists(script)) stop("Missing ADL script: ", script)
 
 message("Running ", basename(script))
